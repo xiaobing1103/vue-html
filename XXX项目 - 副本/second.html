@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目第二页</title>
+    <link
+      rel="icon"
+      href="https://js.chongso.com/pc/images/favicon.ico"
+      type="image/gif"
+    />
+  </head>
+  <script src="./js/vue.global.js"></script>
+  <link rel="stylesheet" href="./css/index.css" />
+  <script src="./js/data.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+
+  <body>
+    <div id="app">
+      <header-component
+        :search="search"
+        @child-event="handleChildEvent"
+      ></header-component>
+      <tabbox-component :tab-List="tabList"></tabbox-component>
+      <desctabs-component :desc-Tabs="descTabs"></desctabs-component>
+      <template v-if="name">
+        <div class="petPage_Box">
+          <header
+            :style="{ background: `url(${filterDetailData.titleImage}) 50% 20% no-repeat`, backgroundSize:'cover' }"
+            class="petPage_Box_header"
+          >
+            <div class="petPage_Box_header_tips">
+              <div class="petPage_Box_header_tips_box">
+                <b class="one">宠物大全</b>
+                <article>{{filterDetailData.name}}</article>
+                <span class="two">- 快来了解我吧 -</span>
+              </div>
+            </div>
+          </header>
+          <section class="pet_info">
+            <header class="pet_info_header">
+              <span class="pet_info_header_span1">
+                {{filterDetailData.name}}的"身份证"</span
+              >
+              <span class="pet_info_header_span2">BASIC INFORMATION</span>
+            </header>
+            <main class="pet_info_main row">
+              <div class="pet_info_main_leftBox col-6">
+                <div class="row">
+                  <img class="col-12" :src="filterDetailData.picture1" alt="" />
+                </div>
+                <div class="row" style="margin: 10px 0">
+                  <img
+                    class="col-6"
+                    style="padding-left: 0"
+                    :src="filterDetailData.picture2"
+                    alt=""
+                  />
+                  <img
+                    class="col-6"
+                    style="padding-right: 0"
+                    :src="filterDetailData.picture3"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="pet_info_main_rightBox col-6">
+                <header class="pet_info_main_rightBox_header">
+                  <div class="pet_info_main_rightBox_header_title row">
+                    <span class="col-12"> {{filterDetailData.name}}</span>
+                  </div>
+                  <div class="pet_info_main_rightBox_header_desc row">
+                    <span
+                      class="col-12 pet_info_main_rightBox_header_desc_span1"
+                      >参考价格:
+                      <span
+                        class="pet_info_main_rightBox_header_desc_span1_span2"
+                        >{{filterDetailData.pirce}}</span
+                      ></span
+                    >
+                  </div>
+                </header>
+
+                <main class="pet_info_main_rightBox_main">
+                  <section class="pet_info_main_rightBox_main_header">
+                    {{filterDetailData.name}}的最新热搜
+                  </section>
+
+                  <section class="pet_info_main_rightBox_main_content row">
+                    <div class="pet_info_main_rightBox_main_content_box col-6">
+                      <p
+                        class="pet_info_main_rightBox_main_content_p"
+                        v-for="datas of filterDetailData.newActives.slice(0,8)"
+                      >
+                        {{datas.newsTiele}}
+                      </p>
+                    </div>
+                    <div class="pet_info_main_rightBox_main_content_box col-6">
+                      <p
+                        class="pet_info_main_rightBox_main_content_p"
+                        v-for="datas of filterDetailData.newActives.slice(9,18)"
+                      >
+                        {{datas.newsTiele}}
+                      </p>
+                    </div>
+                  </section>
+                </main>
+              </div>
+            </main>
+          </section>
+        </div>
+      </template>
+      <template v-else>
+        <notfound-component :back-Home="backHome"></notfound-component>
+      </template>
+      <footerdata-component :footer-Data="footerData"></footerdata-component>
+    </div>
+    <script src="./template/template.js"></script>
+    <script src="./js/second.js"></script>
+  </body>
+</html>
