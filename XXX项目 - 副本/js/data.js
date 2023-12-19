@@ -1,9 +1,9 @@
-const tabList = [
-  { id: 111, title: "首页", href: "#", active: true },
+const tabListBase = [
+  { id: 111, title: "首页", href: "./index.html", active: true },
   {
     id: 112,
     title: "宠物大全",
-    href: "https://www.chongso.com/chongwudaquan/",
+    href: "#",
     active: false,
     hasChild: true,
     pets: [
@@ -17,14 +17,14 @@ const tabList = [
   {
     id: 113,
     title: "宠物视频",
-    href: "https://www.chongso.com/shipin/",
+    href: "#",
     active: false,
     hasChild: false,
   },
   {
     id: 114,
     title: "宠物趣事",
-    href: "https://www.chongso.com/funny/",
+    href: "#",
     active: false,
     hasChild: true,
     pets: [
@@ -42,7 +42,7 @@ const tabList = [
   {
     id: 115,
     title: "宠物医疗",
-    href: "https://www.chongso.com/hosptial/",
+    href: "#",
     active: false,
     hasChild: true,
     pets: [
@@ -59,42 +59,42 @@ const tabList = [
   {
     id: 116,
     title: "宠物问答",
-    href: "https://www.chongso.com/wenda/",
+    href: "#",
     active: false,
     hasChild: false,
   },
 ];
 
-const descTabs = [
+const descTabsBase = [
   {
     id: 12345,
     totalTitle: "咨讯",
-    href: "https://www.chongso.com/zixun/",
+    href: "#",
     imageSrc: "https://js.chongso.com/pc/images/i_ui5.png",
     lists: [
       {
         totalTitle: "新闻",
-        href: "https://www.chongso.com/zixun/all/news",
+        href: "#",
       },
       {
         totalTitle: "展会",
-        href: "https://www.chongso.com/zixun/all/zhanhui",
+        href: "#",
       },
       {
         totalTitle: "政策",
-        href: "https://www.chongso.com/zixun/all/policy/",
+        href: "#",
       },
       {
         totalTitle: "行业",
-        href: "https://www.chongso.com/zixun/all/dynamic/",
+        href: "#",
       },
       {
         totalTitle: "故事",
-        href: "https://www.chongso.com/zixun/all/story",
+        href: "#",
       },
       {
         totalTitle: "趣闻",
-        href: "https://www.chongso.com/zixun/all/fun/",
+        href: "#",
       },
     ],
   },
@@ -102,32 +102,32 @@ const descTabs = [
   {
     id: 12346,
     totalTitle: "百科",
-    href: "https://www.chongso.com/baike/",
+    href: "#",
     imageSrc: "https://js.chongso.com/pc/images/i_ui3.png",
     lists: [
       {
         totalTitle: "疾病",
-        href: "https://www.chongso.com/baike/all/disease/",
+        href: "#",
       },
       {
         totalTitle: "选购",
-        href: "https://www.chongso.com/baike/all/xuangou/",
+        href: "#",
       },
       {
         totalTitle: "孕事",
-        href: "https://www.chongso.com/baike/all/yunshi/",
+        href: "#",
       },
       {
         totalTitle: "供求",
-        href: "https://www.chongso.com/baike/all/message/",
+        href: "#",
       },
       {
         totalTitle: "交配",
-        href: "https://www.chongso.com/baike/all/breed/",
+        href: "#",
       },
       {
         totalTitle: "习性",
-        href: "https://www.chongso.com/baike/all/petlife/",
+        href: "#",
       },
     ],
   },
@@ -135,32 +135,32 @@ const descTabs = [
   {
     id: 12347,
     totalTitle: "日常",
-    href: "https://www.chongso.com/daily/",
+    href: "#",
     imageSrc: "https://js.chongso.com/pc/images/i_ui1.png",
     lists: [
       {
         totalTitle: "美容",
-        href: "https://www.chongso.com/daily/all/cosmetology/",
+        href: "#",
       },
       {
         totalTitle: "驯养",
-        href: "https://www.chongso.com/daily/all/domestication/",
+        href: "#",
       },
       {
         totalTitle: "用品",
-        href: "https://www.chongso.com/daily/all/appliance/",
+        href: "#",
       },
       {
         totalTitle: "饮食",
-        href: "https://www.chongso.com/daily/all/diet/",
+        href: "#",
       },
       {
         totalTitle: "清洁",
-        href: "https://www.chongso.com/daily/all/clean/",
+        href: "#",
       },
       {
         totalTitle: "驱虫",
-        href: "https://www.chongso.com/daily/all/quchong/",
+        href: "#",
       },
     ],
   },
@@ -168,32 +168,32 @@ const descTabs = [
   {
     id: 12348,
     totalTitle: "问答",
-    href: "https://www.chongso.com/wenda/",
+    href: "#",
     imageSrc: "https://js.chongso.com/pc/images/wenda.png",
     lists: [
       {
         totalTitle: "狗狗",
-        href: "https://www.chongso.com/wenda/dog/",
+        href: "#",
       },
       {
         totalTitle: "猫咪",
-        href: "https://www.chongso.com/wenda/cat/",
+        href: "#",
       },
       {
         totalTitle: "小宠",
-        href: "https://www.chongso.com/wenda/xiaochong/",
+        href: "#",
       },
       {
         totalTitle: "水族",
-        href: "https://www.chongso.com/wenda/shuizu/",
+        href: "#",
       },
       {
         totalTitle: "爬宠",
-        href: "https://www.chongso.com/wenda/pachong/",
+        href: "#",
       },
       {
         totalTitle: "鸟类",
-        href: "https://www.chongso.com/wenda/bird/",
+        href: "#",
       },
     ],
   },
@@ -201,30 +201,30 @@ const descTabs = [
   {
     id: 12349,
     totalTitle: "活动",
-    href: "https://www.chongso.com/activity/",
+    href: "#",
     imageSrc: "https://js.chongso.com/pc/images/i_ui2.png",
     lists: [
       {
         totalTitle: "宠物评比",
-        href: "https://www.chongso.com/activity/all/compare/",
+        href: "#",
       },
       {
         totalTitle: "年度盛典",
-        href: "https://www.chongso.com/activity/all/grand/",
+        href: "#",
       },
       {
         totalTitle: "最美宠物",
-        href: "https://www.chongso.com/activity/all/beautiful/",
+        href: "#",
       },
       {
         totalTitle: "人气宠物",
-        href: "https://www.chongso.com/activity/all/popularity/",
+        href: "#",
       },
     ],
   },
 ];
 
-const cardList = [
+const cardListBase = [
   { totalTitle: "热宠导航" },
   {
     totalTitle: "狗狗",
@@ -419,7 +419,7 @@ const cardList = [
   },
 ];
 
-const hotList = [
+const hotListBase = [
   {
     totalTitle: "热门动态",
     lists: [
@@ -432,7 +432,7 @@ const hotList = [
   },
 ];
 
-const hotList1 = [
+const hotList1Base = [
   {
     totalTitle: "网友热搜",
     lists: [
@@ -445,7 +445,7 @@ const hotList1 = [
   },
 ];
 
-const petHealthy = [
+const petHealthyBase = [
   {
     title: "狗伤人事件倍受社会关注 主人需要规范养狗",
     des: "崇州市小区恶犬撕咬事件引起了广泛的社会关注和思考。确保人与宠物犬的和谐相处，需要采取一系列措施来加强管理和监管，保障公众的安全。",
@@ -456,30 +456,30 @@ const petHealthy = [
   },
 ];
 
-const petKnowledge = [
+const petKnowledgeBase = [
   {
     title: "汪星人头条",
     imageSrc: "https://js.chongso.com/pc/images/tiao_2.jpg",
     knowledgeList: [
       {
         content: "训练哈士奇的小妙招 怎么训练哈士奇",
-        href: "https://www.chongso.com/k/mrwzkdkcd/",
+        href: "#",
       },
       {
         content: "泰迪为什么这么色，泰迪色的原因",
-        href: "https://www.chongso.com/k/mrwzkdkfk/",
+        href: "#",
       },
       {
         content: "母狗几个月来月经",
-        href: "https://www.chongso.com/k/mrwzkdkhc/",
+        href: "#",
       },
       {
         content: "狗有牙结石还很臭怎么办 狗牙结石处理方法",
-        href: "https://www.chongso.com/k/mrwzkdkhb/",
+        href: "#",
       },
       {
         content: "狗一岁相当于人多少岁 狗狗和人类年龄换算",
-        href: "https://www.chongso.com/k/mrwzkdkxg/",
+        href: "#",
       },
     ],
   },
@@ -489,29 +489,29 @@ const petKnowledge = [
     knowledgeList: [
       {
         content: "猫吃生肉需要注意什么",
-        href: "https://www.chongso.com/k/mrwzkdkck/",
+        href: "#",
       },
       {
         content: "猫耳朵瘙痒是什么原因 猫耳瘙痒的原因",
-        href: "https://www.chongso.com/k/mrwzkdkkh/",
+        href: "#",
       },
       {
         content: "暹罗猫为什么会变色 暹罗猫变色的原因",
-        href: "https://www.chongso.com/k/mrwzkdkxk/",
+        href: "#",
       },
       {
         content: "猫咪吃蛋黄有什么好处",
-        href: "https://www.chongso.com/k/mrwzkdkxc/",
+        href: "#",
       },
       {
         content: "美短太淘气怎么训练",
-        href: "https://www.chongso.com/k/mrwzkdkcg/",
+        href: "#",
       },
     ],
   },
 ];
 
-const tabThink = [
+const tabThinkBase = [
   {
     imageSrc: "https://js.chongso.com/pc/images/dh_pet7.png",
     title: "宠物健康",
@@ -546,7 +546,7 @@ const tabThink = [
   },
 ];
 
-const newsList = [
+const newsListBase = [
   {
     totalTitle: "信元发育宝猫粮被指含有毒物质，宠物主发起投诉",
     news: [
@@ -558,7 +558,7 @@ const newsList = [
   },
 ];
 
-const newsList1 = [
+const newsList1Base = [
   {
     totalTitle: "主人被隔离 宠物何去何从 深圳建立首个宠物方舱",
     news: [
@@ -579,7 +579,7 @@ const newsList1 = [
   },
 ];
 
-const newsList2 = [
+const newsList2Base = [
   {
     totalTitle: "鱼缸里为什么要种水草 鱼缸水草的作用",
     news: [
@@ -591,7 +591,7 @@ const newsList2 = [
   },
 ];
 
-const rightNews = [
+const rightNewsBase = [
   { title: "狗对主人低吼该不该打", href: "#" },
   { title: "苏格兰牧羊犬和边牧的区别", href: "#" },
   { title: "苏格兰牧羊犬和边牧的区别", href: "#" },
@@ -612,7 +612,7 @@ const rightNews = [
   { title: "缅因猫多大认主人", href: "#" },
 ];
 
-const footerData = {
+const footerDataBase = {
   logoSrc: "https://js.chongso.com/pc/images/nlogo.png",
   descrption: "Copyright © 2019-2020 ",
   descrption0: "宠搜网",
@@ -624,7 +624,7 @@ const footerData = {
     "违法及侵权请联系：TEL:0731-84117792 E-MAIL:11247931@qq.com 本站由北京市万商天勤律师事务所王兴未律师提供法律服务",
 };
 
-const detailData = [
+const detailDataBase = [
   {
     name: "贵宾犬",
     titleImage:

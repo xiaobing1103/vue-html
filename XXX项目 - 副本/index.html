@@ -10,28 +10,124 @@
   <link rel="stylesheet" href="./css/index.css" />
   <body>
     <div id="app">
-      {{ message }}
       <my-component :search="search"></my-component>
-    </div>
 
+      <tab-box-template :tab-List="tabList"></tab-box-template>
+      <desc-tabs-template :desc-Tabs="descTabs"></desc-tabs-template>
+      <tab-class-tempalte
+        :card-List="cardList"
+        :todetail-Page="todetailPage"
+        :select-Card="selectCard"
+        :emit-Event="emitEvent"
+        :pet-Detail-Top="petDetailTop"
+        :pet-Detail-Bottom="petDetailBottom"
+      ></tab-class-tempalte>
+
+      <main class="main row">
+        <section class="main_left col-4">
+          <hot-list-template :hot-List="hotList"></hot-list-template>
+          <tab-think-template :tab-think="tabThink"></tab-think-template>
+          <hot-list-template :hot-List="hotList1"></hot-list-template>
+        </section>
+        <section class="main_middle col-5">
+          <pets-healthy-template
+            :pet-healthy="petHealthy"
+          ></pets-healthy-template>
+          <news-tab-template :news-List="newsList"></news-tab-template>
+          <news-tab-template :news-List="newsList1"></news-tab-template>
+          <news-tab-template :news-List="newsList2"></news-tab-template>
+        </section>
+        <section class="main_right col-3">
+          <tabpicture-template
+            :pet-Knowledge="petKnowledge"
+          ></tabpicture-template>
+
+          <tabright-news-template :right-News="rightNews">
+          </tabright-news-template>
+        </section>
+      </main>
+      <footer-template :footer-Data="footerData"></footer-template>
+    </div>
+    <script src="./js/data.js"></script>
     <script src="./js/vue.global.js"></script>
     <script src="./components/my-component.js"></script>
     <script>
-      const { createApp, ref } = Vue;
+      const { createApp, ref, watch, computed } = Vue;
 
       const app = createApp({
         components: {
           MyComponent,
+          FooterTemplate,
+          TabBoxTemplate,
+          DescTabsTemplate,
+          TabClassTempalte,
+          HotListTemplate,
+          TabThinkTemplate,
+          PetsHealthyTemplate,
+          NewsTabTemplate,
+          TabpictureTemplate,
+          TabrightNewsTemplate,
         },
         setup() {
-          const message = ref("Hello vue!");
-          const search = (searchText) => {
-            window.location.href = `https://www.baidu.com/s?wd=site:chongso.com%20${searchText}`;
+          const footerData = ref(footerDataBase);
+          const hotList = ref(hotListBase);
+          const tabList = ref(tabListBase);
+          const descTabs = ref(descTabsBase);
+          const cardList = ref(cardListBase);
+          const hotList1 = ref(hotList1Base);
+          const tabThink = ref(tabThinkBase);
+          const petHealthy = ref(petHealthyBase);
+          const newsList = ref(newsListBase);
+          const newsList1 = ref(newsList1Base);
+          const newsList2 = ref(newsList2Base);
+          const petKnowledge = ref(petKnowledgeBase);
+          const rightNews = ref(rightNewsBase);
+          const selectCard = ref(1);
+          const todetailPage = (name) => {
+            if (name.includes("更多")) return;
+            window.location.href = `./second.html?name=${name}`;
           };
-          console.log(MyComponent);
+
+          const petDetailTop = computed(() =>
+            cardList.value[selectCard.value].goodsList.slice(0, 9)
+          );
+          const petDetailBottom = computed(() =>
+            cardList.value[selectCard.value].goodsList.slice(9, 18)
+          );
+
+          const search = (searchText) => {
+            const newPetList = [
+              ...petDetailTop.value,
+              ...petDetailBottom.value,
+            ].filter((items, index) => {
+              return items.name.includes(searchText) ? items : "";
+            });
+            console.log(newPetList);
+            // window.location.href = `https://www.baidu.com/s?wd=site:chongso.com%20${searchText}`;
+          };
+          const emitEvent = (index) => {
+            selectCard.value = index == 0 ? 1 : index;
+          };
           return {
-            message,
             search,
+            footerData,
+            tabList,
+            descTabs,
+            cardList,
+            todetailPage,
+            hotList,
+            hotList1,
+            tabThink,
+            petHealthy,
+            newsList,
+            newsList1,
+            newsList2,
+            petKnowledge,
+            rightNews,
+            selectCard,
+            emitEvent,
+            petDetailTop,
+            petDetailBottom,
           };
         },
       }).mount("#app");

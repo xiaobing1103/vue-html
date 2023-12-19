@@ -5,26 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>项目第二页</title>
-    <link
-      rel="icon"
-      href="https://js.chongso.com/pc/images/favicon.ico"
-      type="image/gif"
-    />
   </head>
-  <script src="./js/vue.global.js"></script>
-  <link rel="stylesheet" href="./css/index.css" />
-  <script src="./js/data.js"></script>
   <link rel="stylesheet" href="./css/bootstrap.min.css" />
-
+  <link rel="stylesheet" href="./css/index.css" />
   <body>
     <div id="app">
-      <header-component
-        :search="search"
-        @child-event="handleChildEvent"
-      ></header-component>
-      <tabbox-component :tab-List="tabList"></tabbox-component>
-      <desctabs-component :desc-Tabs="descTabs"></desctabs-component>
-      <template v-if="name">
+      <my-component :search="search"></my-component>
+
+      <tab-box-template :tab-List="tabList"></tab-box-template>
+      <desc-tabs-template :desc-Tabs="descTabs"></desc-tabs-template>
+      <template v-if="name && filterDetailData">
         <div class="petPage_Box">
           <header
             :style="{ background: `url(${filterDetailData.titleImage}) 50% 20% no-repeat`, backgroundSize:'cover' }"
@@ -112,11 +102,54 @@
         </div>
       </template>
       <template v-else>
-        <notfound-component :back-Home="backHome"></notfound-component>
+        <not-found-template :back-Home="backHome"></not-found-template>
       </template>
-      <footerdata-component :footer-Data="footerData"></footerdata-component>
+
+      <footer-template :footer-Data="footerData"></footer-template>
     </div>
-    <script src="./template/template.js"></script>
-    <script src="./js/second.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/vue.global.js"></script>
+    <script src="./components/my-component.js"></script>
+    <script>
+      const { createApp, ref, watch, computed } = Vue;
+
+      const app = createApp({
+        components: {
+          MyComponent,
+          FooterTemplate,
+          TabBoxTemplate,
+          DescTabsTemplate,
+          NotFoundTemplate,
+        },
+        setup() {
+          const footerData = ref(footerDataBase);
+          const tabList = ref(tabListBase);
+          const descTabs = ref(descTabsBase);
+          const detailData = ref(detailDataBase);
+          const params = new URLSearchParams(window.location.search);
+          const name = ref(params.get("name"));
+          const backHome = () => {
+            window.location.href = "./index.html";
+          };
+          const filterDetailData = computed(() =>
+            detailData.value.find((item) => name.value == item.name)
+          );
+          console.log(name);
+          console.log(filterDetailData);
+          const search = (searchText) => {
+            window.location.href = `https://www.baidu.com/s?wd=site:chongso.com%20${searchText}`;
+          };
+          return {
+            search,
+            footerData,
+            tabList,
+            descTabs,
+            backHome,
+            filterDetailData,
+            name,
+          };
+        },
+      }).mount("#app");
+    </script>
   </body>
 </html>
