@@ -8,10 +8,11 @@
   </head>
   <link rel="stylesheet" href="./css/bootstrap.min.css" />
   <link rel="stylesheet" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/swiper.css" />
+  <script src="./js/swiper.js"></script>
   <body>
     <div id="app">
-      <my-component :search="search"></my-component>
-
+      <my-component :search="search" :place-Holder="placeHolder"></my-component>
       <tab-box-template :tab-List="tabList"></tab-box-template>
       <desc-tabs-template :desc-Tabs="descTabs"></desc-tabs-template>
       <tab-class-tempalte
@@ -21,11 +22,13 @@
         :emit-Event="emitEvent"
         :pet-Detail-Top="petDetailTop"
         :pet-Detail-Bottom="petDetailBottom"
+        :new-Pet-List="newPetList"
       ></tab-class-tempalte>
 
       <main class="main row">
         <section class="main_left col-4">
-          <hot-list-template :hot-List="hotList"></hot-list-template>
+          <banner-template></banner-template>
+          <!-- <hot-list-template :hot-List="hotList"></hot-list-template> -->
           <tab-think-template :tab-think="tabThink"></tab-think-template>
           <hot-list-template :hot-List="hotList1"></hot-list-template>
         </section>
@@ -67,6 +70,7 @@
           NewsTabTemplate,
           TabpictureTemplate,
           TabrightNewsTemplate,
+          BannerTemplate,
         },
         setup() {
           const footerData = ref(footerDataBase);
@@ -83,6 +87,7 @@
           const petKnowledge = ref(petKnowledgeBase);
           const rightNews = ref(rightNewsBase);
           const selectCard = ref(1);
+          const placeHolder = ref("请筛选宠物！");
           const todetailPage = (name) => {
             if (name.includes("更多")) return;
             window.location.href = `./second.html?name=${name}`;
@@ -94,18 +99,23 @@
           const petDetailBottom = computed(() =>
             cardList.value[selectCard.value].goodsList.slice(9, 18)
           );
-
+          let newPetList = ref([]);
           const search = (searchText) => {
-            const newPetList = [
-              ...petDetailTop.value,
-              ...petDetailBottom.value,
-            ].filter((items, index) => {
-              return items.name.includes(searchText) ? items : "";
-            });
-            console.log(newPetList);
+            if (searchText.trim() == "") {
+              newPetList.value = [];
+            } else {
+              newPetList.value = [
+                ...petDetailTop.value,
+                ...petDetailBottom.value,
+              ].filter((items, index) => {
+                return items.name.includes(searchText) ? items : "";
+              });
+            }
+
             // window.location.href = `https://www.baidu.com/s?wd=site:chongso.com%20${searchText}`;
           };
           const emitEvent = (index) => {
+            newPetList.value = [];
             selectCard.value = index == 0 ? 1 : index;
           };
           return {
@@ -128,9 +138,31 @@
             emitEvent,
             petDetailTop,
             petDetailBottom,
+            newPetList,
+            placeHolder,
           };
         },
       }).mount("#app");
+    </script>
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        // autoplay: {
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // },
+        speed: 500,
+        spaceBetween: 30,
+        effect: "fade",
+        loop: true, //必须
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
     </script>
   </body>
 </html>

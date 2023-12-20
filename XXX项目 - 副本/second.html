@@ -10,8 +10,7 @@
   <link rel="stylesheet" href="./css/index.css" />
   <body>
     <div id="app">
-      <my-component :search="search"></my-component>
-
+      <my-component :search="search" :place-Holder="placeHolder"></my-component>
       <tab-box-template :tab-List="tabList"></tab-box-template>
       <desc-tabs-template :desc-Tabs="descTabs"></desc-tabs-template>
       <template v-if="name && filterDetailData">
@@ -128,6 +127,7 @@
           const detailData = ref(detailDataBase);
           const params = new URLSearchParams(window.location.search);
           const name = ref(params.get("name"));
+          const placeHolder = ref("请输入宠物关键词，跳转页面！");
           const backHome = () => {
             window.location.href = "./index.html";
           };
@@ -147,6 +147,7 @@
             backHome,
             filterDetailData,
             name,
+            placeHolder,
           };
         },
       }).mount("#app");

@@ -6,14 +6,15 @@ const MyComponent = {
           </div>
           <div class="header-rightBox col">
             <div class="rounded-pill round">
-              <input placeholder="请筛选宠物" v-model="searchText" class="serch_input" type="text" />
+              <input :placeholder="placeHolder" v-model="searchText" class="serch_input" type="text" />
             <button @click="notifyParent" class="searchButton">搜索</button>
         </div>
         </div>
     </div>
 </header>`,
-  props: ["search"],
+  props: ["search", "placeHolder"],
   setup(props) {
+    console.log(props);
     const searchText = ref("");
     const notifyParent = () => {
       props.search(searchText.value);
@@ -85,52 +86,75 @@ const DescTabsTemplate = {
 
 const TabClassTempalte = {
   template: `<section class="tabClass">
-            <div class="tabClass_top">
-              <p
-                class="tabClass_top_p"
-                v-for="(items,index) of cardList"
-                :key="index"
-              >
-                <span
-                  class="tabClass_top_p_span"
-                  @click="changeSelected(index)"
-                  :class="{ 'active': selectCard === index &&  selectCard !== 0 }"
-                  >{{items.totalTitle}}</span
-                >
-              </p>
+      <div class="tabClass_top">
+        <p
+          class="tabClass_top_p"
+          v-for="(items,index) of cardList"
+          :key="index"
+        >
+          <span
+            class="tabClass_top_p_span"
+            @click="changeSelected(index)"
+            :class="{ 'active': selectCard === index &&  selectCard !== 0 }"
+            >{{items.totalTitle}}</span
+          >
+        </p>
+      </div>
+
+      <template v-if="isNewPetListNotEmpty">
+        <div class="tabClass_bottom">
+          <div
+            class="tabClass_bottom_card"
+            v-for="cards of newPetList"
+            @click="todetailPage(cards.name)"
+          >
+
+           <template v-if="cards.image">
+              <img :src="cards.image" :alt="cards.name" />
+            </template>
+
+            <span v-if="cards.image">{{cards.name}}</span>
+            <div v-if="cards.image" class="tabClass_bottom_card_desc">
+              <span>问答</span><span>疾病</span><span>百科</span>
             </div>
-            <div class="tabClass_bottom">
-              <div
-                class="tabClass_bottom_card"
-                v-for="cards of petDetailTop"
-                @click="todetailPage(cards.name)"
-              >
-                <img :src="cards.image" :alt="cards.name" />
-                <span>{{cards.name}}</span>
-                <div class="tabClass_bottom_card_desc">
-                  <span>问答</span><span>疾病</span><span>百科</span>
-                </div>
-              </div>
+          </div>
+        </div>
+      </template>
+
+      <template v-else>
+        <div class="tabClass_bottom">
+          <div
+            class="tabClass_bottom_card"
+            v-for="cards of petDetailTop"
+            @click="todetailPage(cards.name)"
+          >
+            <img :src="cards.image" :alt="cards.name" />
+            <span>{{cards.name}}</span>
+            <div class="tabClass_bottom_card_desc">
+              <span>问答</span><span>疾病</span><span>百科</span>
             </div>
-            <div class="tabClass_bottom">
-              <div
-                class="tabClass_bottom_card"
-                v-for="cards of petDetailBottom"
-                @click="todetailPage(cards.name)"
-              >
-                <template v-if="cards.image">
-                  <img :src="cards.image" :alt="cards.name" />
-                </template>
-                <template v-if="!cards.image">
-                  <span class="tabClass_bottom_card_more">+</span>
-                </template>
-                <span>{{cards.name}}</span>
-                <div class="tabClass_bottom_card_desc">
-                  <span>问答</span><span>疾病</span><span>百科</span>
-                </div>
-              </div>
+          </div>
+        </div> 
+        <div class="tabClass_bottom">
+          <div
+            class="tabClass_bottom_card"
+            v-for="cards of petDetailBottom"
+            @click="todetailPage(cards.name)"
+          >
+            <template v-if="cards.image">
+              <img :src="cards.image" :alt="cards.name" />
+            </template>
+            <template v-if="!cards.image">
+              <span class="tabClass_bottom_card_more">+</span>
+            </template>
+            <span>{{cards.name}}</span>
+            <div class="tabClass_bottom_card_desc">
+              <span>问答</span><span>疾病</span><span>百科</span>
             </div>
-          </section>`,
+          </div>
+        </div>
+      </template>
+    </section>`,
   props: [
     "cardList",
     "todetailPage",
@@ -138,16 +162,124 @@ const TabClassTempalte = {
     "emitEvent",
     "petDetailBottom",
     "petDetailTop",
+    "newPetList",
   ],
   setup(props) {
+    console.log(props.newPetList);
     const changeSelected = (index) => {
       props.emitEvent(index);
     };
-
+    const isNewPetListNotEmpty = computed(() => props.newPetList.length > 0);
     return {
       changeSelected,
+      isNewPetListNotEmpty,
     };
   },
+};
+
+const BannerTemplate = {
+  template: ` <div style="width:100%;height:300px; position: relative;" 
+      class="swiper-container swiper-container-fade swiper-container-initialized swiper-container-horizontal"
+    >
+      <div class="swiper-wrapper" style="transition-duration: 0ms">
+        <div
+          class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
+          data-swiper-slide-index="4"
+          style="
+            position: relative;
+            overflow: hidden; 
+            transition-duration: 0ms;
+            opacity: 1;
+            transform: translate3d(0px, 0px, 0px);
+            background:url('https://img.chongso.com/20231018/84d92806722418af3982ce29e7ca9efe.jpg')center center no-repeat
+          "
+        >
+
+        </div>
+        <div
+          class="swiper-slide"
+          data-swiper-slide-index="0"
+          style="
+            position: relative;
+            overflow: hidden; 
+            transition-duration: 0ms;
+            opacity: 1;
+            transform: translate3d(-1920px, 0px, 0px);
+             background:url('https://img.chongso.com/20231018/0d7af1b38da217ca5427e7f234c70726.jpg')center center no-repeat
+          "
+        >
+        </div>
+        <div
+          class="swiper-slide swiper-slide-prev"
+          data-swiper-slide-index="2"
+          style="
+            position: relative;
+            overflow: hidden;   
+            transition-duration: 0ms;
+            opacity: 1;
+            transform: translate3d(-5760px, 0px, 0px);
+             background:url('https://img.chongso.com/20231018/65804c489bc7bc8172be87f0205aec78.jpg')center center no-repeat
+
+          "
+        >
+        
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div
+        class="swiper-pagination swiper-pagination-white swiper-pagination-clickable swiper-pagination-bullets"
+      >
+        <span
+          class="swiper-pagination-bullet"
+          tabindex="0"
+          role="button"
+          aria-label="Go to slide 1"
+        ></span
+        ><span
+          class="swiper-pagination-bullet"
+          tabindex="0"
+          role="button"
+          aria-label="Go to slide 2"
+        ></span
+        ><span
+          class="swiper-pagination-bullet"
+          tabindex="0"
+          role="button"
+          aria-label="Go to slide 3"
+        ></span
+        ><span
+          class="swiper-pagination-bullet swiper-pagination-bullet-active"
+          tabindex="0"
+          role="button"
+          aria-label="Go to slide 4"
+        ></span
+        ><span
+          class="swiper-pagination-bullet"
+          tabindex="0"
+          role="button"
+          aria-label="Go to slide 5"
+        ></span>
+      </div>
+      <!-- Add Arrows -->
+      <div
+        class="swiper-button-next swiper-button-white"
+        tabindex="0"
+        role="button"
+        aria-label="Next slide"
+      ></div>
+      <div
+        class="swiper-button-prev swiper-button-white"
+        tabindex="0"
+        role="button"
+        aria-label="Previous slide"
+      ></div>
+      <span
+        class="swiper-notification"
+        aria-live="assertive"
+        aria-atomic="true"
+      ></span>
+    </div>`,
+  // props: ["hotList"],
 };
 
 const HotListTemplate = {
