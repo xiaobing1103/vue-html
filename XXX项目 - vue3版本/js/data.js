@@ -617,11 +617,11 @@ const footerDataBase = {
   descrption: "Copyright © 2019-2020 ",
   descrption0: "宠搜网",
   origin: " 版权所有 ",
-  descrption1: "关于我们",
-  descrption2: "京ICP备2022007530号",
-  descrption3: "视频许可证编号：（湘）字第00637号",
+  descrption1: " @ 孙宇萌22107290219",
+  descrption2: "",
+  descrption3: "孙宇萌耶耶耶",
   descrption4:
-    "违法及侵权请联系：TEL:0731-84117792 E-MAIL:11247931@qq.com 本站由北京市万商天勤律师事务所王兴未律师提供法律服务",
+    " 1445302481@qq.com",
 };
 
 const detailDataBase = [
